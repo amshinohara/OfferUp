@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OfferUp - Edição de {{titulo}}</title>
+</head>
+<body>
+    <h4>Edição de {{titulo}}</h4>
+    <form action="/categoria/editar/{{ categoria.id }}" method="post">
+        <p><label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" value="{{categoria.nome}}"></p>
+
+        <p><label for="desc">Descricao</label>
+        <input type="text" id="desc" name="desc" value="{{categoria.desc}}"></p>       
+
+        <p><input type="submit" value="Alterar"></p>
+        <a href={{url_for("categoria")}}> Cancelar</a>
+    </form>
+
+</body>
+</html>

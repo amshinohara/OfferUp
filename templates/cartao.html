@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OfferUp - Adicionar {{titulo}}</title>
+</head>
+<body>
+    <h4>Cadastrar {{titulo}}</h1>
+    <form action="/cartao/criar" method="post">
+        <p><label for="num_cartao">Número do Cartão</label></p>
+        <p><input type="text" id="num_cartao" name="num_cartao"></p>
+
+        <p><label for="nome_cartao">Nome Impresso no Cartão </label></p>
+        <p><input type="text" id="nome_cartao" name="nome_cartao"></p>
+
+        <p><label for="Validade">Validade do Cartão - Mês/Ano</label></p>
+        <p><input type="number" id="month" min="01" max="12" name="month">
+            <input type="number" id="year" min="2023" max="2045" name="year"></p>
+
+        <p><label for="cvc">Código CVC</label></p>
+        <p><input type="number" max="999" min="000" id="cvc" name="cvc"></p>
+
+        <p><input type="submit" value="Cadastrar"></p>
+    </form>
+
+    <h4>Lista de {{titulo}}</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Numero do Cartão</th>
+                <th>Nome no Cartão</th>
+                <th>Validade mês</th>
+                <th>Validade Ano</th>
+                <th>CVC</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cartao in cartoes%}
+                <tr>
+                    <td>{{ cartao.num_cartao }}</td>
+                    <td>{{ cartao.nome_cartao }}</td>
+                    <td>{{ cartao.month }}</td>
+                    <td>{{ cartao.year }}</td>
+                    <td>{{ cartao.cvc }}</td>
+                    <td><a href={{ url_for("editarcartao",id=cartao.id) }}>Editar?</a></td>
+                    <td><a href={{ url_for("deletarcartao",id=cartao.id) }}>Deletar?</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
