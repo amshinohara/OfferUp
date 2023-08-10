@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OfferUp - Edição de {{titulo}}</title>
+</head>
+<body>
+    <h4>Edição de {{titulo}}</h1>
+    <form action="/cartao/editar/{{ cartao.id }}" method="post">
+        <p><label for="num_cartao">Número do Cartão</label></p>
+        <p><input type="text" id="num_cartao" name="num_cartao" value="{{cartao.num_cartao}}"></p>
+
+        <p><label for="nome_cartao">Nome Impresso no Cartão </label></p>
+        <p><input type="text" id="nome_cartao" name="nome_cartao"value="{{cartao.nome_cartao}}""></p>
+
+        <p><label for="Validade">Validade do Cartão - Mês/Ano</label></p>
+        <p><input type="number" id="month" min="01" max="12" name="month" value="{{cartao.month}}">
+            <input type="number" id="year" min="2023" max="2045" name="year" value="{{cartao.year}}"></p>
+
+        <p><label for="cvc">Código CVC</label></p>
+        <p><input type="number" max="999" min="000" id="cvc" name="cvc" value="{{cartao.cvc}}"></p>
+
+        <p><input type="submit" value="Alterar"></p>
+        <a href={{url_for("cartao")}}> Cancelar</a>
+    </form>
+</body>
+</html>
