@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>OfferUp - {{titulo}}</title>
+    <title>OfferUp - Cadastrar {{titulo}}</title>
     <link rel="stylesheet" href="../static/css/bootstrap.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
@@ -41,29 +41,53 @@
         </div>
     </nav>
     <div class="container mt-4">
-        <h4>{{titulo}}</h4>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href={{url_for("favoritos") }}>
+              <img src="{{ url_for('static', filename='img/favoritos.svg') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+              Favoritos
+            </a>
+          </nav>
+        <a href={{url_for("favoritos") }}> </a>
+        <h4 class="text-center">Lista de {{titulo}}</h4>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-responsive">
                 <thead class="thead-default">
                     <tr>
-                        <th>Nome do Produto</th>
-                        <th>Quantidade</th>
-                        <th>Nome do Comprador</th>
-                        <th>Data e Hora da Venda</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Especificação</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Preço</th>
+                        <th>Categoria</th>
+                        <th>Vendendor</th>
+                        <th>Favoritar</th>
+                        <th>Comprar</th>
+                        <th>Dúvidas</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for venda in vendas %}
-                    <tr>
-                        <td>{{ venda.produto.prod_nome }}</td>
-                        <td>{{ venda.quantidade }}</td>
-                        <td>{{ venda.comprador.nome }}</td>
-                        <td>{{ venda.data_hora }}</td>
-                    </tr>
+                    {% for produto in produtos %}
+                        <tr>
+                            <td>{{ produto.prod_nome }}</td>
+                            <td>{{ produto.prod_desc }}</td>
+                            <td>{{ produto.prod_espec }}</td>
+                            <td>{{ produto.prod_marca }}</td>
+                            <td>{{ produto.prod_modelo }}</td>
+                            <td>{{ produto.prod_preco }}</td>
+                            <td>{{ produto.categoria.nome }}</td>
+                            <td>{{ produto.usuario.nome }}</td>
+                            <td>
+                                <form action="/favoritar/{{ produto.id }}" method="post">
+                                    <button type="submit">Favoritar</button>
+                                </form>
+                            </td>
+                            <td><a href="{{ url_for('escolher_compra', produto_id=produto.id) }}" class="btn btn-primary">Comprar</a></td>
+                            <td><a href="{{ url_for('realizar_pergunta', produto_id=produto.id) }}" class="btn btn-primary">Perguntas</a></td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
-</body>
 </html>

@@ -41,29 +41,24 @@
         </div>
     </nav>
     <div class="container mt-4">
-        <h4>{{titulo}}</h4>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered table-responsive">
-                <thead class="thead-default">
-                    <tr>
-                        <th>Nome do Produto</th>
-                        <th>Quantidade</th>
-                        <th>Nome do Comprador</th>
-                        <th>Data e Hora da Venda</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for venda in vendas %}
-                    <tr>
-                        <td>{{ venda.produto.prod_nome }}</td>
-                        <td>{{ venda.quantidade }}</td>
-                        <td>{{ venda.comprador.nome }}</td>
-                        <td>{{ venda.data_hora }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        <h2>Responder Perguntas para o Produto: {{ produto.prod_nome }}</h2>
+        {% for pergunta in perguntas %}
+            <h3>Pergunta:</h3>
+            <p>{{ pergunta.texto }}</p>
+
+            {% if pergunta.resposta %}
+            <h4>Resposta Anterior:</h4>
+            <p>{{ pergunta.resposta.texto }}</p>
+            {% else %}
+            <form method="post" action="">
+                <input type="hidden" name="pergunta_id" value="{{ pergunta.id }}">
+                <label for="texto_resposta">Responder:</label>
+                <textarea class="form-control" rows="4" name="texto_resposta" required></textarea><br>
+                <button type="submit" class="btn btn-primary">Enviar Resposta</button>
+            </form>
+            {% endif %}
+            <hr>
+        {% endfor %}
     </div>
 </body>
 </html>

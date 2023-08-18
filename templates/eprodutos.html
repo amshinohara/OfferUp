@@ -1,47 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>OfferUp - Edição de {{titulo}}</title>
+    <title>OfferUp - {{ titulo }}</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .navbar-brand img {
+            width: 100px;
+        }
+    </style>
 </head>
 <body>
-    <h4>Edição de {{titulo}}</h4>
-    <form action="/produtos/editar/{{ produto.id }}" method="post">
-        <p><label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" value="{{produto.prod_nome}}"></p>
-
-        <p><label for="desc">Descrição</label>
-        <textarea rows="4" cols="50" id="desc" name="desc" value="{{produto.prod_desc}}"></textarea></p>
-        
-        <p><label for="espec">Especificações</label>
-        <input type="text" id="espec" name="espec" value="{{produto.prod_espec}}"></p>
-
-        <p><label for="marca">Marca</label>
-        <input type="text" id="marca" name="marca" value="{{produto.prod_marca}}"></p>  
-
-        <p><label for="modelo">Modelo</label>
-        <input type="text" id="modelo" name="modelo" value="{{produto.prod_modelo}}"></p>           
-
-        <p><label for="qtd">Quantidade</label>
-        <input type="text" id="qtd" name="qtd" value="{{produto.prod_qtd}}"></p>
-
-        <p><label for="preco">Preco</label>
-        <input type="text" id="preco" name="preco" value="{{produto.prod_preco}}"></p>
-        
-        <p><label for="cat">Categoria</label>
-        <select id="cat" name="cat" value="{{produto.cat_id}}">
-            {% for categoria in categorias %} 
-                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
-            {% endfor %}
-        </select></p>
-
-        <p><label for="cat">Usuario</label>
-            <select id="usu" name="usu" value="{{produto.usu_id}}">
-                {% for usuario in usuarios %} 
-                    <option value="{{ usuario.id }}">{{ usuario.nome }}</option>
-                {% endfor %}
-            </select></p>
-
-        <p><input type="submit" value="Cadastrar"></p>
-    </form>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="OfferUp Logo">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Página Inicial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('central') }}">Central do Usuário</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('categoria') }}">Gerenciar Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('produtos_anunciados') }}">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('sobre') }}">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h4>Lista de {{ titulo }}</h4>
+    </div>
+    <div class="container">
+        <form action="/produtos/editar/{{ produto.id }}" method="post" class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome" name="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Descrição</label>
+                        <textarea class="form-control" rows="4" id="desc" name="desc"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="marca">Marca</label>
+                        <input type="text" class="form-control" id="marca" name="marca">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="espec">Especificações</label>
+                        <input type="text" class="form-control" id="espec" name="espec">
+                    </div>
+                    <div class="form-group">
+                        <label for="modelo">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo">
+                    </div>
+                    <div class="form-group">
+                        <label for="qtd">Quantidade</label>
+                        <input type="text" class="form-control" id="qtd" name="qtd">
+                    </div>
+                    <div class="form-group">
+                        <label for="preco">Preco</label>
+                        <input type="text" class="form-control" id="preco" name="preco">
+                    </div>
+                    <div class="form-group">
+                        <label for="cat">Categoria</label>
+                        <select class="form-control" id="cat" name="cat">
+                            {% for categoria in categorias %} 
+                                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="form-group">
+                    <input type="submit" value="Alterar" class="btn btn-primary">
+                    <a href="{{url_for('produto')}}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

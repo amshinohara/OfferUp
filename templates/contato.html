@@ -1,17 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>OfferUp - {{titulo}}</title>
+    <title>OfferUp - {{titulo}}</title> 
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .navbar-brand img {
+            width: 100px;
+        }
+        .container {
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-    <p><a href={{url_for("central")}}> Central do Usuário</a></p>
-    <p><a href={{url_for("categoria")}}> Gerenciar Categorias</a></p>
-    <p><a href={{url_for("produto")}}> Produtos</a></p>
-    <p><a href={{url_for("sobre")}}> Sobre Nós</a></p>
-    <p><a href={{url_for("contato")}}> Contato</a></p>
-    <h1>Contato</h1>
-    <p>Entre em contato através dos nossos canais de atendimento:</p>
-    <p>E-mail: offerup@offerup.com.br</p>
-    <p>Whatsapp: (18)99999-1111</p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="OfferUp Logo">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Página Inicial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('central') }}">Central do Usuário</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('categoria') }}">Gerenciar Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('produtos_anunciados') }}">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('sobre') }}">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+       <h1>Contato</h1>
+    </div>
+    <div class="container">
+        <p>Entre em contato conosco através dos nossos canais de atendimento:</p>
+        <p><strong>E-mail:</strong> offerup@offerup.com.br</p>
+        <p><strong>Whatsapp:</strong> (18) 99999-1111</p>
+    </div>
 </body>
 </html>

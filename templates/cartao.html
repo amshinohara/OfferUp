@@ -2,52 +2,112 @@
 <html>
 <head>
     <title>OfferUp - Adicionar {{titulo}}</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .navbar-brand img {
+            width: 100px;
+        }
+    </style>
 </head>
 <body>
-    <h4>Cadastrar {{titulo}}</h1>
-    <form action="/cartao/criar" method="post">
-        <p><label for="num_cartao">Número do Cartão</label></p>
-        <p><input type="text" id="num_cartao" name="num_cartao"></p>
-
-        <p><label for="nome_cartao">Nome Impresso no Cartão </label></p>
-        <p><input type="text" id="nome_cartao" name="nome_cartao"></p>
-
-        <p><label for="Validade">Validade do Cartão - Mês/Ano</label></p>
-        <p><input type="number" id="month" min="01" max="12" name="month">
-            <input type="number" id="year" min="2023" max="2045" name="year"></p>
-
-        <p><label for="cvc">Código CVC</label></p>
-        <p><input type="number" max="999" min="000" id="cvc" name="cvc"></p>
-
-        <p><input type="submit" value="Cadastrar"></p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="OfferUp Logo">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Página Inicial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('central') }}">Central do Usuário</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('categoria') }}">Gerenciar Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('produtos_anunciados') }}">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('sobre') }}">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h4>Cadastrar {{titulo}}</h4>
+    </div>
+    <form action="/cartao/criar" method="post" class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="num_cartao">Número do Cartão</label>
+                    <input type="text" class="form-control" id="num_cartao" name="num_cartao">
+                </div>
+                <div class="form-group">
+                    <label for="nome_cartao">Nome Impresso no Cartão</label>
+                    <input type="text" class="form-control" id="nome_cartao" name="nome_cartao">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Validade do Cartão - Mês/Ano</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="month" min="01" max="12" name="month" placeholder="Mês">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="year" min="2023" max="2045" name="year" placeholder="Ano">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cvc">Código CVC</label>
+                    <input type="number" class="form-control" id="cvc" name="cvc" max="999" min="000">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </div>
     </form>
 
-    <h4>Lista de {{titulo}}</h4>
-    <table>
-        <thead>
-            <tr>
-                <th>Numero do Cartão</th>
-                <th>Nome no Cartão</th>
-                <th>Validade mês</th>
-                <th>Validade Ano</th>
-                <th>CVC</th>
-                <th>Editar</th>
-                <th>Deletar</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cartao in cartoes%}
+    <div class="container mt-4">
+        <h4>Lista de {{titulo}}</h4>
+        <table class="table table-striped table-bordered table-responsive">
+            <thead class="thead-default">
                 <tr>
-                    <td>{{ cartao.num_cartao }}</td>
-                    <td>{{ cartao.nome_cartao }}</td>
-                    <td>{{ cartao.month }}</td>
-                    <td>{{ cartao.year }}</td>
-                    <td>{{ cartao.cvc }}</td>
-                    <td><a href={{ url_for("editarcartao",id=cartao.id) }}>Editar?</a></td>
-                    <td><a href={{ url_for("deletarcartao",id=cartao.id) }}>Deletar?</a></td>
+                    <th>Numero do Cartão</th>
+                    <th>Nome no Cartão</th>
+                    <th>Validade mês</th>
+                    <th>Validade Ano</th>
+                    <th>CVC</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for cartao in cartoes%}
+                    <tr>
+                        <td>{{ cartao.num_cartao }}</td>
+                        <td>{{ cartao.nome_cartao }}</td>
+                        <td>{{ cartao.month }}</td>
+                        <td>{{ cartao.year }}</td>
+                        <td>{{ cartao.cvc }}</td>
+                        <td><a href={{ url_for("editarcartao",id=cartao.id) }} class="btn btn-info btn-sm">Editar</a></td>
+                        <td><a href={{ url_for("deletarcartao",id=cartao.id) }} class="btn btn-danger btn-sm">Deletar</a></td>
+                    </tr>
+                {% endfor %}>Editar?</a></td>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

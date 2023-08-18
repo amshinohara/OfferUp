@@ -2,51 +2,105 @@
 <html>
 <head>
     <title>OfferUp - Cadastrar {{titulo}}</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .navbar-brand img {
+            width: 100px;
+        }
+    </style>
 </head>
 <body>
-    <h4>Cadastro de {{titulo}}</h4>
-    <form action="/produtos/criar" method="post">
-        <p><label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome"></p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="OfferUp Logo">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Página Inicial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('central') }}">Central do Usuário</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('categoria') }}">Gerenciar Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('produtos_anunciados') }}">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('sobre') }}">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h4>Cadastro de {{titulo}}</h4>
+    </div>
+    <div class="container">
+        <form action="/produtos/criar" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome" name="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Descrição</label>
+                        <textarea class="form-control" rows="4" id="desc" name="desc"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="marca">Marca</label>
+                        <input type="text" class="form-control" id="marca" name="marca">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="espec">Especificações</label>
+                        <input type="text" class="form-control" id="espec" name="espec">
+                    </div>
+                    <div class="form-group">
+                        <label for="modelo">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo">
+                    </div>
+                    <div class="form-group">
+                        <label for="qtd">Quantidade</label>
+                        <input type="text" class="form-control" id="qtd" name="qtd">
+                    </div>
+                    <div class="form-group">
+                        <label for="preco">Preco</label>
+                        <input type="text" class="form-control" id="preco" name="preco">
+                    </div>
+                    <div class="form-group">
+                        <label for="cat">Categoria</label>
+                        <select class="form-control" id="cat" name="cat">
+                            {% for categoria in categorias %} 
+                                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-6 text-center">
+                    <div class="form-group">
+                        <input type="submit" value="Cadastrar" class="btn btn-primary">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
-        <p><label for="desc">Descrição</label>
-        <textarea rows="4" cols="50" id="desc" name="desc"></textarea></p>
-        
-        <p><label for="espec">Especificações</label>
-        <input type="text" id="espec" name="espec"></p>
-
-        <p><label for="marca">Marca</label>
-        <input type="text" id="marca" name="marca"></p>  
-
-        <p><label for="modelo">Modelo</label>
-        <input type="text" id="modelo" name="modelo"></p>           
-
-        <p><label for="qtd">Quantidade</label>
-        <input type="text" id="qtd" name="qtd"></p>
-
-        <p><label for="preco">Preco</label>
-        <input type="text" id="preco" name="preco"></p>
-        
-        <p><label for="cat">Categoria</label>
-        <select id="cat" name="cat">
-            {% for categoria in categorias %} 
-                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
-            {% endfor %}
-        </select></p>
-
-        <p><label for="cat">Usuario</label>
-            <select id="usu" name="usu">
-                {% for usuario in usuarios %} 
-                    <option value="{{ usuario.id }}">{{ usuario.nome }}</option>
-                {% endfor %}
-            </select></p>
-
-        <p><input type="submit" value="Cadastrar"></p>
-    </form>
-
+    <div class="container mt-4">
         <h4>Lista de {{titulo}}</h4>
-        <table>
-            <thead>
+        <table class="table table-striped table-bordered table-responsive">
+            <thead class="thead-default">
                 <tr>
                     <th>Nome</th>
                     <th>Descrição</th>
@@ -56,6 +110,7 @@
                     <th>Quantidade</th>
                     <th>Preco</th>
                     <th>Categoria</th>
+                    <th>Responder Perguntas</th>
                     <th>Editar</th>
                     <th>Deletar</th>
                 </tr>
@@ -70,15 +125,15 @@
                         <td>{{ produto.prod_modelo }}</td>
                         <td>{{ produto.prod_qtd }}</td>
                         <td>{{ produto.prod_preco }}</td>
-                        <td>{{ produto.cat_nome }}</td>
-                        <td>{{ produto.usu_username }}</td>
-                        <td><a href={{ url_for("editarproduto",id=produto.id) }}>Editar?</a></td>
-                        <td><a href={{ url_for("deletarproduto",id=produto.id) }}>Deletar?</a></td>
+                        <td>{{ produto.categoria.nome }}</td>
+                        <td> <a href="{{ url_for('responder_perguntas', produto_id=produto.id) }}" class="btn btn-primary">Responder</a></td>
+                        <td><a href={{ url_for("editarproduto",id=produto.id) }} class="btn btn-info btn-sm">Editar</a></td>
+                        <td><a href={{ url_for("deletarproduto",id=produto.id) }} class="btn btn-danger btn-sm">Deletar</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-
+    </div>
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>OfferUp - {{titulo}}</title>
+    <title>OfferUp - {{ titulo }}</title>
     <link rel="stylesheet" href="../static/css/bootstrap.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
@@ -41,29 +41,43 @@
         </div>
     </nav>
     <div class="container mt-4">
-        <h4>{{titulo}}</h4>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered table-responsive">
-                <thead class="thead-default">
+        <h4>Lista de {{ titulo }}</h4>
+    </div>
+    <div class="container">
+        <table class="table table-striped table-bordered table-responsive">
+            <thead class="thead-default">
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Especificação</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Categoria</th>
+                    <th>Remover dos Favoritos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for favorito in favoritos %}
                     <tr>
-                        <th>Nome do Produto</th>
-                        <th>Quantidade</th>
-                        <th>Nome do Comprador</th>
-                        <th>Data e Hora da Venda</th>
+                        <td>{{ favorito.produto.prod_nome }}</td>
+                        <td>{{ favorito.produto.prod_desc }}</td>
+                        <td>{{ favorito.produto.prod_espec }}</td>
+                        <td>{{ favorito.produto.prod_marca }}</td>
+                        <td>{{ favorito.produto.prod_modelo }}</td>
+                        <td>{{ favorito.produto.prod_qtd }}</td>
+                        <td>{{ favorito.produto.prod_preco }}</td>
+                        <td>{{ favorito.produto.categoria.nome }}</td>
+                        <td>
+                            <form method="post" action="{{ url_for('remover_favorito', id=favorito.produto_id) }}">
+                                <button type="submit">Remover</button>
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for venda in vendas %}
-                    <tr>
-                        <td>{{ venda.produto.prod_nome }}</td>
-                        <td>{{ venda.quantidade }}</td>
-                        <td>{{ venda.comprador.nome }}</td>
-                        <td>{{ venda.data_hora }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

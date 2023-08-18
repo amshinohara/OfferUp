@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>OfferUp - Sua Oferta em suas mãos!</title>
+    <title>OfferUp - Sua Oferta em Suas Mãos!</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .navbar-brand img {
+            width: 100px;
+        }
+    </style>
 </head>
 <body>
-    <p><a href={{url_for("central")}}> Central do Usuário</a></p>
-    <p><a href={{url_for("categoria")}}> Gerenciar Categorias</a></p>
-    <p><a href={{url_for("produto")}}> Produtos</a></p>
-    <p><a href={{url_for("sobre")}}> Sobre Nós</a></p>
-    <p><a href={{url_for("contato")}}> Contato</a></p>
-    <h1>Muito Bem-vindo a Plataforma de Venda OfferUp.</h1>
-    <p>Aqui você pode vender e comprar de forma rápida e prática.</p>
-    <p>Nossa equipe de Suporte estará disponível para te auxiliar no que precisar.</p>
-    <p>Desejamos que você faça boas Vendas ou Compras por aqui.</p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="OfferUp Logo">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Página Inicial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('central') }}">Central do Usuário</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('categoria') }}">Gerenciar Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('produtos_anunciados') }}">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('sobre') }}">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contato') }}">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h1 class="display-4">Bem-Vindo à Plataforma de Vendas OfferUp</h1>
+    </div>  
+    <div class="container mt-3">
+        <p class="lead">Aqui você pode comprar e vender de forma rápida e prática.</p>
+        <p class="lead">Nossa equipe de suporte estará disponível para ajudar sempre que precisar.</p>
+        <p class="lead">Desejamos que você tenha ótimas vendas e compras conosco!</p>
+    </div>
 </body>
 </html>
