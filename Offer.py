@@ -251,7 +251,7 @@ def editarusuario(id):
         usuario.username = request.form.get('user')
         usuario.nome = request.form.get('nome')
         usuario.email = request.form.get('email')
-        usuario.senha = hash = hashlib.sha512(str(request.form.get('passwd')).encode("utf-8")).hexdigest()
+        usuario.senha = hashlib.sha512(str(request.form.get('passwd')).encode("utf-8")).hexdigest()
         usuario.rua = request.form.get('rua')
         usuario.numero = request.form.get('numero')
         usuario.bairro = request.form.get('bairro')
