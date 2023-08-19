@@ -421,7 +421,7 @@ def deletarproduto(id):
     db.session.commit()
     return redirect(url_for('produto'))
 
-@app.route("/produtos/Comprar")
+@app.route("/produtos/comprar")
 def produtos_anunciados():
     return render_template('produtos_anunciados.html', produtos = Produto.query.all(), categorias = Categoria.query.all(), usuarios = Usuario.query.all(), titulo="Produtos")
 
